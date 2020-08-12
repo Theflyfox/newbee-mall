@@ -64,15 +64,17 @@ public class CommonController {
     public void mallKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         com.google.code.kaptcha.impl.DefaultKaptcha newBeeMallLoginKaptcha = new com.google.code.kaptcha.impl.DefaultKaptcha();
         Properties properties = new Properties();
-        properties.put("kaptcha.border", "no");
+        //kaptcha配置属性解释：https://blog.csdn.net/hu1010037197/article/details/80205077?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param
+        properties.put("kaptcha.border", "no");//设置是否有边框
         properties.put("kaptcha.textproducer.font.color", "27,174,171");
         properties.put("kaptcha.noise.color", "20,33,42");
+        properties.put("kaptcha.textproducer.char.string", "1234567890");//使用指定字符生成验证码
         properties.put("kaptcha.textproducer.font.size", "30");
         properties.put("kaptcha.image.width", "110");
         properties.put("kaptcha.image.height", "40");
         properties.put("kaptcha.session.key", Constants.MALL_VERIFY_CODE_KEY);
         properties.put("kaptcha.textproducer.char.space", "2");
-        properties.put("kaptcha.textproducer.char.length", "6");
+        properties.put("kaptcha.textproducer.char.length", "4");
         Config config = new Config(properties);
         newBeeMallLoginKaptcha.setConfig(config);
         byte[] captchaOutputStream = null;
